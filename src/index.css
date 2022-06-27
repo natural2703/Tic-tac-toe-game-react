@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.singleSquare{
+  height: 100px;
+  width: 100px;
+  background-color: red;
+  padding: 1em;
+  margin:1em;
+  cursor: pointer;
+}
+.squareRow{
+  display:flex;
+  flex-direction: row;
+}
