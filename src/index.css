@@ -23,3 +23,8 @@ code {
   display:flex;
   flex-direction: row;
 }
+.myGamePlace{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 300px;
+}

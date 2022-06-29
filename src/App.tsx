@@ -1,27 +1,32 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { SingleSquare } from './components/SingleSquare';
 
 
-function App() {
-
+const App = () => {
+  const [gameArray,setGameArray] = useState<Array<Array<string>>>([
+    ["","",""],
+    ["","",""],
+    ["","",""]
+  ])
+  const [gameChar,setGameChar] = useState("O")
+  const changeGameChar = ()=>{
+    if(gameChar === "X"){
+      setGameChar("O")
+    }else{
+      setGameChar("X")
+    }
+  }
   return (
     <div className="App">
-      <div className='squareRow'>
-        <SingleSquare/>
-        <SingleSquare/>
-        <SingleSquare/>
+      <div className='myGamePlace'>
+        {gameArray.map((item,index)=>{
+          return item.map((square,squareIndex)=>{
+            return <SingleSquare gameChar={gameChar} changeGameChar={changeGameChar} posX={squareIndex} posY={index}/>
+          })
+        })}
       </div>
-      <div className='squareRow'>
-        <SingleSquare/>
-        <SingleSquare/>
-        <SingleSquare/>
-      </div>
-      <div className='squareRow'>
-        <SingleSquare/>
-        <SingleSquare/>
-        <SingleSquare/>
-      </div>
-      
+      <button>reset</button>
+      <button>save game</button>
     </div>
   );
 }
