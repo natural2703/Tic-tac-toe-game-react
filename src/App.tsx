@@ -16,16 +16,24 @@ const App = () => {
       setGameChar("X")
     }
   }
+  const resetGame = () => {
+    setGameArray([
+      ["x","x","x"],
+      ["x","x","x"],
+      ["x","x","x"]
+    ])
+  }
   return (
     <div className="App">
       <div className='myGamePlace'>
         {gameArray.map((item,index)=>{
           return item.map((square,squareIndex)=>{
-            return <SingleSquare gameChar={gameChar} changeGameChar={changeGameChar} posX={squareIndex} posY={index}/>
+            return <SingleSquare gameChar={gameChar} changeGameChar={changeGameChar} posX={squareIndex} posY={index} setGameArray={setGameArray}
+            valueFromArray={gameArray[index][squareIndex]}  key={`${index}+${squareIndex}`}/>
           })
         })}
       </div>
-      <button>reset</button>
+      <button onClick={resetGame}>reset</button>
       <button>save game</button>
     </div>
   );
