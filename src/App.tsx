@@ -9,7 +9,8 @@ const App = () => {
     ["","",""],
     ["","",""]
   ])
-  const [gameChar,setGameChar] = useState("O")
+  const [gameChar,setGameChar] = useState<string>("O")
+  const [gameFinished,setGameFinished] = useState<boolean>(false);
   const changeGameChar = ()=>{
     if(gameChar === "X"){
       setGameChar("O")
@@ -22,7 +23,8 @@ const App = () => {
       ["","",""],
       ["","",""],
       ["","",""]
-    ])
+    ]);
+    setGameFinished(false);
   }
   const handleClick = (a:number,b:number)=>{
     let tmpArray = [...gameArray]
@@ -31,8 +33,16 @@ const App = () => {
     changeGameChar()
   }
   useEffect(()=>{
-    console.log(checkForWinnger(gameArray))
+   if(checkForWinnger(gameArray)){
+    alert("skonczono gre");
+    setGameFinished(true)
+   }
   },[gameArray])
+  const saveGame = ():void=>{
+    localStorage.setItem('gameArray',JSON.stringify(gameArray));
+    let myArr = [(JSON.parse(localStorage.getItem('gameArray')??""))]
+    console.log(myArr)
+  }
   return (
     <div className="App">
       <div className='myGamePlace'>
@@ -44,7 +54,8 @@ const App = () => {
         })}
       </div>
       <button onClick={resetGame}>reset</button>
-      <button>save game</button>
+      <button onClick={saveGame}>save game</button>
+      <button>load game</button>
     </div>
   );
 }
