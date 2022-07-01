@@ -6,13 +6,14 @@ type SingleSquareType = {
     posX:number,
     posY:number,
     valueFromArray:string,
-    modifyGameArray:(a:number,b:number)=>void
+    modifyGameArray:(a:number,b:number)=>void,
+    isGameFinished:boolean
 }
 
-export const SingleSquare:FunctionalComponent<SingleSquareType> = ({gameChar,posX,posY,valueFromArray,modifyGameArray})=>{
+export const SingleSquare:FunctionalComponent<SingleSquareType> = ({gameChar,posX,posY,valueFromArray,modifyGameArray,isGameFinished})=>{
     const handleClick = (e:React.MouseEvent<HTMLElement>)=>{
         e.preventDefault()
-       if(!blocked){
+       if(!blocked || !isGameFinished){
            setBlocked(true)
            modifyGameArray(posY,posX)
         }

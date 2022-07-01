@@ -40,22 +40,30 @@ const App = () => {
   },[gameArray])
   const saveGame = ():void=>{
     localStorage.setItem('gameArray',JSON.stringify(gameArray));
+    // let myArr = [(JSON.parse(localStorage.getItem('gameArray')??"null"))]
+    // console.log(myArr)
+  }
+  const loadGame = ():void=>{
     let myArr = [(JSON.parse(localStorage.getItem('gameArray')??""))]
-    console.log(myArr)
+    if(myArr){
+        setGameArray(myArr)
+    }
   }
   return (
     <div className="App">
+      <h2>Game</h2>
       <div className='myGamePlace'>
         {gameArray.map((item,index)=>{
           return item.map((square,squareIndex)=>{
             return <SingleSquare gameChar={gameChar} posX={squareIndex} posY={index}
-            valueFromArray={gameArray[index][squareIndex]}  key={`${index}+${squareIndex}`} modifyGameArray={handleClick}/>
+            valueFromArray={gameArray[index][squareIndex]}  key={`${index}+${squareIndex}`} 
+            modifyGameArray={handleClick} isGameFinished={gameFinished}/>
           })
         })}
       </div>
       <button onClick={resetGame}>reset</button>
       <button onClick={saveGame}>save game</button>
-      <button>load game</button>
+      <button onClick={loadGame}>load game</button>
     </div>
   );
 }
