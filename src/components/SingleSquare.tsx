@@ -13,9 +13,11 @@ type SingleSquareType = {
 export const SingleSquare:FunctionalComponent<SingleSquareType> = ({gameChar,posX,posY,valueFromArray,modifyGameArray,isGameFinished})=>{
     const handleClick = (e:React.MouseEvent<HTMLElement>)=>{
         e.preventDefault()
-       if(!blocked || !isGameFinished){
-           setBlocked(true)
-           modifyGameArray(posY,posX)
+       if(!blocked){
+            if(!isGameFinished){
+                setBlocked(true)
+                modifyGameArray(posY,posX)
+            }
         }
     }
     

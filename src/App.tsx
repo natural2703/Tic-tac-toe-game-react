@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import { SingleSquare } from './components/SingleSquare';
 import { checkForWinnger } from './services/checkForWinner';
-
+import {save,load} from './services/storeGameInLocalStorage'
 
 const App = () => {
   const [gameArray,setGameArray] = useState<Array<Array<string>>>([
@@ -19,12 +19,13 @@ const App = () => {
     }
   }
   const resetGame = () => {
-    setGameArray([
+    /*setGameArray([
       ["","",""],
       ["","",""],
       ["","",""]
     ]);
-    setGameFinished(false);
+    setGameFinished(false);*/
+    window.location.reload();
   }
   const handleClick = (a:number,b:number)=>{
     let tmpArray = [...gameArray]
@@ -38,17 +39,17 @@ const App = () => {
     setGameFinished(true)
    }
   },[gameArray])
-  const saveGame = ():void=>{
+  /*const saveGame = ():void=>{
     localStorage.setItem('gameArray',JSON.stringify(gameArray));
     // let myArr = [(JSON.parse(localStorage.getItem('gameArray')??"null"))]
     // console.log(myArr)
   }
-  const loadGame = ():void=>{
+  /*const loadGame = ():void=>{
     let myArr = [(JSON.parse(localStorage.getItem('gameArray')??""))]
     if(myArr){
         setGameArray(myArr)
     }
-  }
+  }*/
   return (
     <div className="App">
       <h2>Game</h2>
@@ -62,8 +63,8 @@ const App = () => {
         })}
       </div>
       <button onClick={resetGame}>reset</button>
-      <button onClick={saveGame}>save game</button>
-      <button onClick={loadGame}>load game</button>
+      <button onClick={()=>save(gameArray)}>save game</button>
+      <button onClick={()=>load(setGameArray)}>load game</button>
     </div>
   );
 }
